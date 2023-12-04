@@ -9,7 +9,7 @@ library(lme4)
 # source the multidiv function
 # source the stepba function
 
-setwd("~/")
+# setwd("~/")
 All_BigData <- read.table("All_BigData.txt", header = T)
 
 source("stepba function.R")
