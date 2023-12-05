@@ -7,7 +7,7 @@
 library(tidyr)
 
 # setwd("~/")
-Mean_traits <- read.table("Mean_traits.txt", header = T)
+Mean_SLA <- read.table("Mean_SLA.txt", header = T)
 All_BigData <- read.table("All_BigData.txt", header = T)
 sp_presence <- read.table("sp_presence.txt", header = T)
 source("beta_div_functions.R")
@@ -73,7 +73,6 @@ Sp_Effect_pre <- Sp_Effect_pre[!Sp_Effect_pre$Variable=="Block",]
 
 
 
-monoSLA = subset(Mean_traits, SD == 1 & Ni == 0 & Fz == 0)
 RowVar <-  function(x, ...){
   rowSums((x-rowMeans(x, ...))^2, ...)/(dim(x)[2]-1)
 }
@@ -104,10 +103,10 @@ for(i in c(1:ncol(sp_pairs))){
   df_pre_pos_scol = rbind(df_pre_pos_scol, yep)
 }
 
-df_pre_pos_scol = merge(df_pre_pos_scol, monoSLA[,c("CS_SLA", "Comb")], by.x = "Sp1", by.y = "Comb")
-df_pre_pos_scol = merge(df_pre_pos_scol, monoSLA[,c("CS_SLA", "Comb")], by.x = "Sp2", by.y = "Comb")
-df_pre_pos_scol = merge(df_pre_pos_scol, monoSLA[,c("CS_SLA", "Comb")], by.x = "Sp3", by.y = "Comb")
-df_pre_pos_scol = merge(df_pre_pos_scol, monoSLA[,c("CS_SLA", "Comb")], by.x = "Sp4", by.y = "Comb")
+df_pre_pos_scol = merge(df_pre_pos_scol, Mean_SLA[,c("CWM_SLA", "Species")], by.x = "Sp1", by.y = "Species")
+df_pre_pos_scol = merge(df_pre_pos_scol, Mean_SLA[,c("CWM_SLA", "Species")], by.x = "Sp2", by.y = "Species")
+df_pre_pos_scol = merge(df_pre_pos_scol, Mean_SLA[,c("CWM_SLA", "Species")], by.x = "Sp3", by.y = "Species")
+df_pre_pos_scol = merge(df_pre_pos_scol, Mean_SLA[,c("CWM_SLA", "Species")], by.x = "Sp4", by.y = "Species")
 head(df_pre_pos_scol)
 
 df_pre_pos_scol$Mean_SLA = rowMeans(df_pre_pos_scol[,c(8:11)])
@@ -152,10 +151,10 @@ for(i in c(1:ncol(sp_pairs))){
   df_pre_neg_scol = rbind(df_pre_neg_scol, yep)
 }
 
-df_pre_neg_scol = merge(df_pre_neg_scol, monoSLA[,c("CS_SLA", "Comb")], by.x = "Sp1", by.y = "Comb")
-df_pre_neg_scol = merge(df_pre_neg_scol, monoSLA[,c("CS_SLA", "Comb")], by.x = "Sp2", by.y = "Comb")
-df_pre_neg_scol = merge(df_pre_neg_scol, monoSLA[,c("CS_SLA", "Comb")], by.x = "Sp3", by.y = "Comb")
-df_pre_neg_scol = merge(df_pre_neg_scol, monoSLA[,c("CS_SLA", "Comb")], by.x = "Sp4", by.y = "Comb")
+df_pre_neg_scol = merge(df_pre_neg_scol, Mean_SLA[,c("CWM_SLA", "Species")], by.x = "Sp1", by.y = "Species")
+df_pre_neg_scol = merge(df_pre_neg_scol, Mean_SLA[,c("CWM_SLA", "Species")], by.x = "Sp2", by.y = "Species")
+df_pre_neg_scol = merge(df_pre_neg_scol, Mean_SLA[,c("CWM_SLA", "Species")], by.x = "Sp3", by.y = "Species")
+df_pre_neg_scol = merge(df_pre_neg_scol, Mean_SLA[,c("CWM_SLA", "Species")], by.x = "Sp4", by.y = "Species")
 head(df_pre_neg_scol)
 
 
@@ -321,8 +320,8 @@ for(i in c(1:ncol(sp_pairs))){
 
 names(df_pre_to_scol) = c("Trade_offs", "Sp1", "Sp2")
 
-df_pre_to_scol = merge(df_pre_to_scol, monoSLA[,c("CS_SLA", "Comb")], by.x = "Sp1", by.y = "Comb")
-df_pre_to_scol = merge(df_pre_to_scol, monoSLA[,c("CS_SLA", "Comb")], by.x = "Sp2", by.y = "Comb")
+df_pre_to_scol = merge(df_pre_to_scol, Mean_SLA[,c("CWM_SLA", "Species")], by.x = "Sp1", by.y = "Species")
+df_pre_to_scol = merge(df_pre_to_scol, Mean_SLA[,c("CWM_SLA", "Species")], by.x = "Sp2", by.y = "Species")
 head(df_pre_to_scol)
 
 df_pre_to_scol$Mean_SLA = rowMeans(df_pre_to_scol[,c(4:5)])
