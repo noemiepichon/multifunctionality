@@ -20,6 +20,8 @@ source("multidiv.R")
 ##### scale and data trasformation ####
 
 
+pd_attributes_variable <- attributes(scale(All_BigData[c("Species_richness", "Nitrogen", "Fungicide", 
+                                                         "CWM_SLA", "MPD_SLA_abundance", "MPD_SLA_presence")]))
 All_BigData[c("Species_richness", "Nitrogen", "Fungicide", 
               "CWM_SLA", "MPD_SLA_abundance", "MPD_SLA_presence")] = scale(All_BigData[c("Species_richness", "Nitrogen", "Fungicide", 
                                                                                          "CWM_SLA", "MPD_SLA_abundance", "MPD_SLA_presence")])
@@ -77,9 +79,9 @@ MegaData$Threshold_num = scale(MegaData$Threshold_num)
 
 # Main model
 
-megamodel <- lmer(m ~ Threshold_num * (Nitrogen + Fungicide + Species_richness + CWM_SLA + MPD_SLA_presence)^2  
-                  - CWM_SLA:MPD_SLA_presence - Threshold_num:CWM_SLA:MPD_SLA_presence 
-                  + (1|Block) + (1|Combination) + 
+megamodel <- lmer(m ~ Threshold_num * (Nitrogen + Fungicide + Species_richness + CWM_SLA + MPD_SLA_presence)^2
+                  - CWM_SLA:MPD_SLA_presence - Threshold_num:CWM_SLA:MPD_SLA_presence
+                  + (1|Block) + (1|Combination) +
                     (Threshold_num|Plot_Nr),
                   control = lmerControl(optimizer = "bobyqa"),
                   MegaData)
